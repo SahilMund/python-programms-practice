@@ -1,0 +1,44 @@
+diabetes dataset
+******************
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+df1=pd.read_csv("D:/Python Training/diabetescsv/diabetes.csv")
+df1
+
+df1.corr()
+
+sns.heatmap(df1.corr())
+
+X=df1[["Pregnancies","Glucose","BloodPressure","SkinThickness","Insulin","BMI","DiabetesPedigreeFunction","Age"]]
+y=df1["Outcome"]
+
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.4,random_state=50)
+X_train
+
+Outcome_corr=df1.corr().iloc[:,-1].values.tolist()[:-1]
+print(Outcome_corr)
+Outcome_corr.sort(reverse=True)
+print(Outcome_corr)
+meanCrr=sum(Outcome_corr)/len(Outcome_corr)
+allowedCol=[]
+for i in Outcome_corr:
+    if i>meanCrr:
+        allowedCol.append(df1.corr().iloc[:,-1].values.tolist()[:-1])
+print(allowedCol)
+
+
+#to predict the values
+from sklearn.linear_model import LogisticRegression
+logmodel=LogisticRegression()
+logmodel.fit(X_train,y_train)
+prediction=logmodel.predict(X_test)
+
+#to show the confused matrix and model score	
+print(pd.crosstab(y_test,prediction,rownames=['True'],colnames=['predicted'],margins=True))
+from sklearn import metrics
+print("model score::", logmodel.score(X,y))

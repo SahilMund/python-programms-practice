@@ -1,0 +1,36 @@
+#importing libraries
+**********************
+
+import numpy as np
+import pandas as pd
+import matplotib.pyplot as plt
+import seaborn as sns
+
+
+#fetch data using pandas
+data1=pd.read_csv("D:/Python Training/sa-housing-dataset/housing_train.csv")
+#check data
+data1.isna().sum()
+
+
+
+sns.heatmap(data1.corr(),annot=True)
+
+#split the dataframe into train and test
+
+X=data1[['Avg. Area Income','Avg. Area House Age','Avg. Area Number of Rooms','Area Population']]
+y=data1['Price']
+from sklearn.model_selection import train_test_split
+X_train,X_test,Y_train,Y_test=train_test_ssplt(x,y,test_size=0.4,random_state=50)
+
+
+#importing algorithms training
+
+from sklearn.linear_model import LinearRegression
+lm=LinearRegression()
+lm.fit(X_train,y_train)
+print(lm.intercept_)
+print(lm.coef_)
+prediction=lm.predict(X_test)
+plt.figure(figsize=(10,10))
+plt.scatter(y_testprediction,edgecolor="black")

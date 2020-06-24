@@ -1,0 +1,33 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+df=pd.read_csv("D:/Python Training/diabetescsv/diabetes.csv")
+df
+
+X=df[["Pregnancies","Glucose","BloodPressure","SkinThickness","Insulin","BMI","DiabetesPedigreeFunction","Age"]]
+y=df["Outcome"]
+
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.4,random_state=50)
+X_train
+
+
+
+#Decision tree
+from sklearn.tree import DecisionTreeClassifier
+dt=DecisionTreeClassifier()
+dt.fit(X_train,y_train)
+dt.predict(X_test)
+
+dt.score(X_test,y_test)
+
+
+
+#RandomForest
+from sklearn.ensemble import RandomForestClassifier
+rf=RandomForestClassifier()
+rf.fit(X_train,y_train)
+rf.predict(X_test)
+
+rf.score(X_test,y_test)

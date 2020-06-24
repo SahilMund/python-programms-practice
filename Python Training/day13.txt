@@ -1,0 +1,33 @@
+k nearest neighbor algorithm::(Lazy Algorithm)
+************************************************
+Objectives:
+01.Read the data
+02.Check for parameters
+03.Create classifiers and models
+
+from sklearn.neighbors import KNeighborsClassifier
+knn=KNeighborsClassifier(n_neighbors=3)
+
+04.Fit models
+knn.fit(X_train,y_train)
+
+05.Predict the data
+knn.predict(X_test)
+
+06.Check score
+knn.score(X-test,y_test)
+
+
+07.Compare score with different scoring methods(,cross validation score & score by model parameters)
+
+**cross_val_score
+from sklearn.model_selection import cross_val_score
+import numpy as np
+knn_cv=KNeighborsClassifier(n_neighbors=3)
+cv_scores=cross_val_score(knn_cv,X,y,cv=5)
+print(cv_scores)
+print("cv_scores mean:{}".format(np.mean(cv_scores)))
+
+**Determine the best K-value
+knn_gscv.best_params_
+knn_gscv.best_score_

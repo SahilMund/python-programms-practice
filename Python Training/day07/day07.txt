@@ -1,0 +1,112 @@
+numpy
+********
+import numpy a np
+list1=[1,2,3,4,5,6,7,9,7.9] #values converted to float
+list2=[1,2,3,4,5,6,7,"abc"] #valuess converted to string
+arr1=np.array[list1]
+print(arr1)
+
+
+
+list3=[[1,2,3],[4,5,6],[7,8,9]]
+arr2=np.arr(list2)
+#return the tuple containing rows and columns by using shape
+shp=arr2.shape	
+print("Row:",shp[0])
+print("col:",shp[1])
+print(arr2)
+
+#length of array
+print("array size",arr2.size)
+print("array size",len(arr2))
+
+#array space allocation
+print("tsa::" ,arr2.nbytes)
+print("ts::",arr2.size*arr2.itemsize)
+
+#cumulative operations
+list4=[1,2,3,4,5,6,7]
+arr3=np.array(list4)
+print("cp::",np.cumprod(arr3))
+print("cs::",np.cumsum(arr3))
+
+
+#conversion of 2D to 1D array
+abclist=[[1,2,3],[4,5,6],[7,8,9]]
+abcarr=np.array(abclist)
+abcarr.flatten()
+print(abcarr.flatten())
+
+
+#conversio of 1D to 2D array
+abcarr.reshape(3,3)
+
+#calculate sum and product
+print(abcarr.sum())
+print(abcarr.prod())
+
+#min and max
+print(abcarr.min())
+print(abcarr.max())
+
+#sorting of array
+new=[6,5,4,7,5,2,3,1,8]
+newarr=np.array(new)
+print(np.sort(newarr))
+
+#indexing of array
+mnop=np.array([[1,2,3],[4,5,6],[7,8,9]])
+for i in range (0,3):
+    print("indexing::",mnop[i])
+
+#fetching array
+print("fetch01::",mnop[1,:2])
+print("fetch02::",mnop[1:3,1:3])
+print("fetch03::",mnop[1:3,[0,2]])
+
+#array operations
+xyz=np.array([1,2,3,4])
+stu=np.array([5,6,7,8])
+print("sum::",xyz+stu)
+print("diff::",xyz-stu)
+print("prod::",xyz*stu)
+print("div::",xyz/stu)
+print("exp::",xyz**stu)
+
+#array comparisons
+print(xyz>stu)
+print(xyz==stu)
+print(xyz>=stu)
+print(xyz<=stu)
+print(xyz<stu)
+
+#array concatenation
+print("vertical",np.vstack((xyz,stu)))	#vertical
+print("hor",np.hstack((xyz,stu)))	#horizontal
+
+#producing unique elements
+any=np.array([1,2,3,4,6,6,2,2,5,4,4])
+print(np.unique(any))
+unarr,ind=np.unique(any,return_index=True)	#return index index of the first occurence of element
+print(ind)
+
+#add diagonal elements of array
+some=np.array([[1,2,3],[4,5,6],[7,8,9]])
+print(some)
+print("diagonal sum::",sum(some.diagonal()))
+print(sum(some[i][i] for i in range(3)))
+
+#array creation using methods
+print(np.ones([4,4]))		#2D array created where elements are 1
+print(np.zeros([4,4]))		#2D array created where elemets are 0
+print(np.identity(4))		#array size is 4 but diagonal is 1
+print(np.arrange(1))
+np.full([2,2],5)		#receive a list [2,2] where every value is 5
+
+#replace min and max value of array with mean
+some.max()
+some.min()
+np.hstack(some)
+mean=sum(some)/len(some)
+(some.max(),mean)
+(some.min(),mean)

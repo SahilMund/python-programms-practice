@@ -1,0 +1,28 @@
+Introduction to Machine Learning
+*********************************
+
+Objectives
+01.
+02.
+
+
+#types of algorithms
+*********************
+01.supervised learning
+	Regression 
+	Classification
+
+02.unsupervised learning
+	
+
+
+
+Regression technique
+*********************
+
+
+
+
+
+Logistic Regression
+********************

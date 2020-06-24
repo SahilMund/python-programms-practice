@@ -1,0 +1,62 @@
+import pandas as pd
+import numpy as np 
+import matplotlib.pyplot as plt
+import seaborn as sns
+df1=pd.read_csv("D:/Python Training/Cancer.csv")
+df1
+
+df1.corr()
+
+sns.heatmap(df1.corr())
+
+Class_corr=df1.corr().iloc[:,-1].values.tolist()[:-1]
+print(Class_corr)
+Class_corr.sort(reverse=True)
+print(Class_corr)
+
+meanCrr=sum(Class_corr)/len(Class_corr)
+allowedCol=[]
+for i in Class_corr:
+    if (i > meanCrr):
+        allowedCol.append(df1.corr().iloc[:,-1].values.tolist()[:-1].index(i))
+print(allowedCol)
+
+fin=[]
+col=df1.columns.tolist()
+for i in col:
+    if col.index(i) in allowedCol:
+        fin.append(col[col.index(i)])
+print(fin)
+
+df2=df1["fin"]
+sns.distplot(df2[["Cell Thickness","Cell Size","Cell Shape","Cell Adhesion","Epith Size","Bare Nuclei","Blood Cromatin","Normal Nucleoli"]])
+
+df3=df2.fillna(df2.mean())
+for i in range(len(fin)):
+    plt.figure()
+    sns.distplot(df3[fin[i]])
+
+
+X=df3[["Cell Thickness","Cell Size","Cell Shape","Cell Adhesion","Epith Size","Bare Nuclei","Blood Cromatin","Normal Nucleoli"]]
+y=df1["Class"]
+
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.4,random_state=50)
+X_train
+
+from sklearn.linear_model import LogisticRegression
+logmodel=LogisticRegression()
+logmodel.fit(X_train,y_train)
+prediction=logmodel.predict(X_test)
+print(prediction)
+print(pd.crosstab(y_test,prediction,rownames=['True'],colnames=['predicted'],margins=True))
+from sklearn import metrics
+print("model score::", logmodel.score(X,y))
+
+print("please enter necessary values:\n")
+[a,b,c,d,e,f,g,h]=eval(input()),eval(input()),eval(input()),eval(input()),eval(input()),eval(input()),eval(input()),eval(input())
+pred=logmodel.predict([[a,b,c,d,e,f,g,h]])
+if pred[0]==1:
+    print("cancer")
+else:
+    print("no cancer")

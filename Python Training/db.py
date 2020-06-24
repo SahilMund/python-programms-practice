@@ -1,0 +1,73 @@
+import sqlite3
+link="D:/Python Training/"
+conn=sqlite3.connect(link+'StudentData.db')
+print("opened successfully")
+
+'''#select data from table
+
+cursor=conn.execute("select * from student")
+for row in cursor:
+    print(row)
+print("values are displayed")
+
+
+#selecting all coumns
+
+cursor=conn.execute("select * from student")
+for row in cursor:
+    print("ID=",row[0])
+    print("Name",row[1])
+    print("Grade",row[2])
+    print("addr",row[3])
+    print("stream",row[4])
+
+#update data in sql table
+
+name=input()
+strm=input()
+conn.execute("update student set STREAM='"+strm+"' where NAME='"+name+"'")
+conn.commit()
+print("update successful")
+
+
+#delete by user preference
+
+name= input()
+conn.execute("delete from student where NAME='"+name+"'")
+conn.commit()
+print("delete successful")
+
+
+#drop table
+
+conn.execute("drop table student")
+conn.commit()
+print("table deleted")'''
+
+
+#program full
+
+table=input()
+conn.execute('''Create Table '''+table+'''
+                (ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                NAME TEXT NOT NULL,
+                GRADE INT NOT NULL,
+                ADDRESS CHAR(50),
+                STREAM CHAR(50));''')
+print("table created")
+NAME="anshuman"
+GRADE=8
+ADDRESS="JAMSHEDPUR"
+STREAM="CSE"
+val=(NAME,GRADE,ADDRESS,STREAM)
+sql="insert into "+table+" (NAME,GRADE,ADDRESS,STREAM) VALUES(?,?,?,?)"
+conn.execute(sql,val);
+conn.commit()
+print("created records successfully")
+cursor=conn.execute("select * from "+table+"")
+for row in cursor:
+    print("ID=",row[0])
+    print("Name",row[1])
+    print("Grade",row[2])
+    print("addr",row[3])
+    print("stream",row[4])

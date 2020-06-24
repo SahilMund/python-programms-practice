@@ -1,0 +1,150 @@
+creating data frame
+********************
+import pandas as pd
+df=pd.DataFrame({})
+print(df)
+
+
+create data frame(random data)
+******************************
+import pandas as pd
+df=pd.DataFrame({
+    "Name":["a","b","c","b","c","a","b","c","a","b"],
+    "Marks":[89,78,56,34,23,45,67,87,9,74]
+})
+print(df)
+
+
+type of dataframe
+******************
+print(type(df))
+
+techniques to fetch columns
+******************************
+print(df["Name"])	#access full column
+
+#access column name
+col=df.columns.tolist()
+print(col)
+
+#index of columns
+*****************
+print(df[col[0]])
+
+
+#fetch the rows
+*****************
+df.iloc[<row value/index]
+df.iloc[0]
+
+#sllicing
+**********
+df.iloc[0:3,0]
+
+
+#dataframe winth nan values
+*****************************
+import pandas as pd
+import numpy as np
+df=pd.DataFrame({
+    "Name":["a","b","c","b","c","a","b","c","a","b"],
+    "Marks":[89,np.nan,56,34,23,45,67,87,np.nan,74],
+    "Roll":[2,4,5,7,np.nan,8,3,np.nan,9,12],
+    "Stream":["cse","ece","it","cse","cse","it","cse","ece","it","cse"]
+})
+print(df)
+
+
+check nan values
+****************
+df.isna()
+df.isna().sum()		#how many nan values in column
+
+
+#cleaning the data
+*******************
+01. remove rows
+02. user specified values
+
+#fill the nan values
+df.fillna(0)
+df.fillna(df.mean())
+
+#dropping nan
+df1.dropna()	#avoid drpona() in most cases
+
+
+data filtering
+*****************
+#single filtering
+df(df["Name"]=="a")
+
+#multiple filtering
+df[df["Name"]=="a" & df["Marks"]>75]
+
+
+#filter data with "a" and "b"
+marks between 70  to 80 and dept.  cse
+print(df[(df["Name"]=="a") & (df["Marks"]>70) | (df["Marks"]<80) & (df["Stream"]=="cse")])
+
+##program to show number of rows and columns in dataframe::
+import pandas as pd
+df=pd.DataFrame({
+    "Name":["a","b","c","b","c","a","b","c","a","b"],
+    "Marks":[89,78,56,34,23,45,67,87,9,74]
+})
+print(df)
+col=df.columns.tolist()
+print(len(col))
+print(df.iloc[4])
+for i in df.index:
+    print(df.iloc[i])
+print(len(df.index))
+
+
+##check nan values in dataframe.fill nan valuesby specific number::
+import pandas as pd
+import numpy as np
+df=pd.DataFrame({
+    "Name":["a","b","c","b","c","a","b","c","a","b"],
+    "Marks":[89,np.nan,56,34,23,45,67,87,np.nan,74],
+    "Roll":[2,4,5,7,np.nan,8,3,np.nan,9,12],
+    "Stream":["cse","ece","it","cse","cse","it","cse","ece","it","cse"]
+})
+print(df)
+print(df.isna())
+print(df.isna().sum())
+print(df.fillna(df.mean()))
+
+if sum(df.isna().sum().values.tolist())>0:
+	df.fillna(1)
+
+#store dataframe to device
+df.to_excel("D:/Python Training/df.xlsx")	#to store as excel file
+df.to_csv("D:/PythonTraining/df.csv")		#to store as csv file
+
+#retrieve data set
+df=pd.read_csv("D:/PythonTraining/df.csv")	#csv file read
+df=pd.read_excel("D:/PythonTraining/df.xlsx")	#excel file read
+
+
+#plot a data series
+*********************
+import matplotlib.pyplot as plt
+#line plot
+plt.figure(figsize=(10,5))
+plt.title("bhai")
+plt.xlabel("stu")
+plt.ylabel("mar")
+plt.plot(df["Marks"],"b")
+
+#bar plot
+import seaborn as sns
+#bar chart
+sns.countplot(df["Stream"])
+
+
+#bar chart using matplotlib
+****************************
+
+plt.plot(df["Marks"],"b")
